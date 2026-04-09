@@ -83,7 +83,9 @@ fun AddUserDialog(
         confirmButton = {
             TextButton(
                 onClick = {
-                    onConfirmation(firstName, lastName)
+                    if (firstName.isNotBlank() || lastName.isNotBlank()) {
+                        onConfirmation(firstName, lastName)
+                    }
                 }
             ) {
                 Text("Добавить")
