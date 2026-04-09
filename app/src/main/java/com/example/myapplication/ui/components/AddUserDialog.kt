@@ -107,9 +107,7 @@ fun AddUserDialogPreview() {
     MyApplicationTheme {
         AddUserDialog(
             onDismissRequest = {},
-            onConfirmation = {
-                firstName, lastName ->
-            },
+            onConfirmation = { _, _ -> },
         )
     }
 }
