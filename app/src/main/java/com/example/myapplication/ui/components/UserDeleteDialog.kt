@@ -17,7 +17,7 @@ fun UserDeleteDialog(
 ) {
     AlertDialog(
         icon = {
-            Icon(Icons.Default.Delete, contentDescription = "Example Icon")
+            Icon(Icons.Default.Delete, contentDescription = null)
         },
         title = {
             Text(text = "Удалить пользователя")
