@@ -17,8 +17,9 @@ class UserViewModel : ViewModel() {
 
     val filteredList by derivedStateOf {
         _fullList.filter {
-            it.firstName.contains(searchText.trim(), ignoreCase = true) ||
-                    it.lastName.contains(searchText.trim(), ignoreCase = true)
+            val query = searchText.trim()
+            it.firstName.contains(query, ignoreCase = true) ||
+                    it.lastName.contains(query, ignoreCase = true)
         }.sortedWith(
             compareBy(
                 { !it.isOnline }, // Сначала те, кто Online (true станет false и уйдет вверх)

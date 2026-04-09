@@ -67,7 +67,7 @@ fun AddUserDialog(
                         .padding(16.dp),
                     trailingIcon = {
                         if (lastName.isNotEmpty()) {
-                            IconButton(onClick = { firstName = "" }) {
+                            IconButton(onClick = { lastName = "" }) {
                                 Icon(Icons.Default.Clear, contentDescription = "Очистить")
                             }
                         }
