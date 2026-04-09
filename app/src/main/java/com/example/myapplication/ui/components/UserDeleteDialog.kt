@@ -7,26 +7,23 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun UserDeleteDialog(
+    name: String,
     onDismissRequest: () -> Unit,
     onConfirmation: () -> Unit,
-    dialogTitle: String,
-    dialogText: String,
-    icon: ImageVector,
 ) {
     AlertDialog(
         icon = {
-            Icon(icon, contentDescription = "Example Icon")
+            Icon(Icons.Default.Delete, contentDescription = "Example Icon")
         },
         title = {
-            Text(text = dialogTitle)
+            Text(text = "Удалить пользователя")
         },
         text = {
-            Text(text = dialogText)
+            Text(text = "Вы уверены, что хотите удалить ${name}?")
         },
         onDismissRequest = {
             onDismissRequest()
@@ -56,10 +53,8 @@ fun UserDeleteDialog(
 @Composable
 fun UserDeleteDialogPreview() {
     UserDeleteDialog(
+        name = "John Doe",
         onDismissRequest = {},
         onConfirmation = {},
-        dialogTitle = "Delete User",
-        dialogText = "Are you sure you want to delete this user?",
-        icon = Icons.Default.Delete,
     )
 }

@@ -4,8 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,14 +27,12 @@ fun UserListScreen(
     // 1. Если во ViewModel есть юзер на удаление — показываем диалог
     viewModel.userToDelete?.let { user ->
         UserDeleteDialog(
+            name = user.firstName,
             onDismissRequest = { viewModel.onDismissDialog() },
             onConfirmation = {
                 viewModel.deleteUser(user)
                 viewModel.onDismissDialog()
             },
-            dialogTitle = "Удалить пользователя",
-            dialogText = "Вы уверены, что хотите удалить ${user.firstName}?",
-            icon = Icons.Default.Delete
         )
     }
     // Вызываем "чистую" функцию и передаем в неё данные из ViewModel
