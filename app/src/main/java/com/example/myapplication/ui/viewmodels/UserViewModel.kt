@@ -16,8 +16,8 @@ class UserViewModel : ViewModel() {
         private set
 
     val filteredList by derivedStateOf {
+        val query = searchText.trim()
         _fullList.filter {
-            val query = searchText.trim()
             it.firstName.contains(query, ignoreCase = true) ||
                     it.lastName.contains(query, ignoreCase = true)
         }.sortedWith(
@@ -83,6 +83,7 @@ class UserViewModel : ViewModel() {
             lastName = lastName,
             isOnline = false
         )
+        isAddingUser = false
     }
 
     fun onShowAddUserDialog() {
