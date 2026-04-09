@@ -7,7 +7,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.ui.models.UserModel
 import com.example.myapplication.utils.getUsersList
-import kotlin.collections.filter
 
 class UserViewModel : ViewModel() {
     private var _fullList by mutableStateOf(getUsersList())

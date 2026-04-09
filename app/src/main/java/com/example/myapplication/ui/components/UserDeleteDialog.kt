@@ -37,7 +37,7 @@ fun UserDeleteDialog(
                     onConfirmation()
                 }
             ) {
-                Text("Confirm")
+                Text("Подтвердить")
             }
         },
         dismissButton = {
@@ -46,7 +46,7 @@ fun UserDeleteDialog(
                     onDismissRequest()
                 }
             ) {
-                Text("Dismiss")
+                Text("Отменить")
             }
         }
     )

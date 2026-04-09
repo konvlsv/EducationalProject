@@ -32,7 +32,6 @@ fun UserListScreen(
             onDismissRequest = { viewModel.onDismissDialog() },
             onConfirmation = {
                 viewModel.deleteUser(user)
-                viewModel.onDismissDialog()
             },
             dialogTitle = "Удалить пользователя",
             dialogText = "Вы уверены, что хотите удалить ${user.firstName}?",
