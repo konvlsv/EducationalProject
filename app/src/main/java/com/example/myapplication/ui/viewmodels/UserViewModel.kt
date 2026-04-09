@@ -34,6 +34,9 @@ class UserViewModel : ViewModel() {
     var selectedUser by mutableStateOf<UserModel?>(null)
         private set
 
+    var isAddingUser by mutableStateOf(false)
+        private set
+
     fun onCardClick(user: UserModel) {
         selectedUser = user
     }
@@ -70,5 +73,22 @@ class UserViewModel : ViewModel() {
     fun deleteUser(user: UserModel) {
         _fullList = _fullList.filter { it.id != user.id }
         userToDelete = null // На всякий случай зануляем здесь тоже
+    }
+
+    fun addUser(firstName: String, lastName: String) {
+        _fullList = _fullList + UserModel(
+            id = _fullList.maxOfOrNull { it.id }?.plus(1) ?: 1,
+            firstName = firstName,
+            lastName = lastName,
+            isOnline = false
+        )
+    }
+
+    fun onShowAddUserDialog() {
+        isAddingUser = true
+    }
+
+    fun onDismissAddUserDialog() {
+        isAddingUser = false
     }
 }

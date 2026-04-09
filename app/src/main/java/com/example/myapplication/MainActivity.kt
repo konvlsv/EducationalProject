@@ -6,6 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -18,7 +22,7 @@ import com.example.myapplication.ui.screens.UserListScreen
 import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.example.myapplication.ui.viewmodels.UserViewModel
 import kotlinx.coroutines.launch
-//test
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +37,13 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     snackbarHost = {
                         SnackbarHost(hostState = snackbarHostState)
+                    },
+                    floatingActionButton = {
+                        if (viewModel.selectedUser == null) { // Показываем FAB только в списке
+                            FloatingActionButton(onClick = { viewModel.onShowAddUserDialog() }) {
+                                Icon(Icons.Default.Add, contentDescription = "Add")
+                            }
+                        }
                     },
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
