@@ -31,6 +31,15 @@ fun AddUserDialog(
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
 
+    // Вычисляем валидность напрямую (без remember), чтобы она обновлялась при каждом вводе символа
+    // Теперь ошибка (isError) будет показываться, только если пользователь начал писать, но стер или не дописал
+    val isFirstNameError = firstName.isNotEmpty() && firstName.length < 3
+    val isLastNameError = lastName.isNotEmpty() && lastName.length < 3
+
+    // Кнопка активна, если оба поля заполнены корректно
+    val isFormValid = firstName.length >= 3 && lastName.length >= 3
+
+
     AlertDialog(
         title = {
             Text(text = "Добавить пользователя")
@@ -41,6 +50,12 @@ fun AddUserDialog(
                     value = firstName,
                     onValueChange = {
                         firstName = it
+                    },
+                    isError = isFirstNameError,
+                    supportingText = {
+                        if (isFirstNameError) {
+                            Text("Имя должно содержать не менее 3 символов")
+                        }
                     },
                     label = { Text("Имя") },
                     modifier = Modifier
@@ -60,6 +75,12 @@ fun AddUserDialog(
                     value = lastName,
                     onValueChange = {
                         lastName = it
+                    },
+                    isError = isLastNameError,
+                    supportingText = {
+                        if (isLastNameError) {
+                            Text("Фамилия должна содержать не менее 3 символов")
+                        }
                     },
                     label = { Text("Фамилия") },
                     modifier = Modifier
@@ -83,10 +104,9 @@ fun AddUserDialog(
         confirmButton = {
             TextButton(
                 onClick = {
-                    if (firstName.isNotBlank() || lastName.isNotBlank()) {
-                        onConfirmation(firstName, lastName)
-                    }
-                }
+                    onConfirmation(firstName, lastName)
+                },
+                enabled = isFormValid
             ) {
                 Text("Добавить")
             }
