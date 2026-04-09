@@ -54,7 +54,7 @@ fun AddUserDialog(
                         }
                     },
                     // Настройка клавиатуры
-                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search)
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
                 )
                 TextField(
                     value = lastName,
@@ -73,7 +73,7 @@ fun AddUserDialog(
                         }
                     },
                     // Настройка клавиатуры
-                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search)
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
                 )
             }
         },
