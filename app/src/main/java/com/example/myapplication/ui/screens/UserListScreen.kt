@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myapplication.ui.components.AddUserDialog
 import com.example.myapplication.ui.components.EmptySearchResult
 import com.example.myapplication.ui.components.UserDeleteDialog
 import com.example.myapplication.ui.components.UserSearchTextField
@@ -24,6 +25,16 @@ fun UserListScreen(
     modifier: Modifier = Modifier,
     viewModel: UserViewModel = viewModel()
 ) {
+    // Если флаг в ViewModel true — рисуем диалог прямо поверх экрана
+    if (viewModel.isAddingUser) {
+        AddUserDialog(
+            onDismissRequest = { viewModel.onDismissAddUserDialog() },
+            onConfirmation = { fName, lName ->
+                viewModel.addUser(fName, lName)
+            }
+        )
+    }
+
     // 1. Если во ViewModel есть юзер на удаление — показываем диалог
     viewModel.userToDelete?.let { user ->
         UserDeleteDialog(

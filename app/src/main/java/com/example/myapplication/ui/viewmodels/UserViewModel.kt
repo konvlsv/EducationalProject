@@ -34,6 +34,9 @@ class UserViewModel : ViewModel() {
     var selectedUser by mutableStateOf<UserModel?>(null)
         private set
 
+    var isAddingUser by mutableStateOf(false)
+        private set
+
     fun onCardClick(user: UserModel) {
         selectedUser = user
     }
@@ -79,5 +82,13 @@ class UserViewModel : ViewModel() {
             lastName = lastName,
             isOnline = false
         )
+    }
+
+    fun onShowAddUserDialog() {
+        isAddingUser = true
+    }
+
+    fun onDismissAddUserDialog() {
+        isAddingUser = false
     }
 }
