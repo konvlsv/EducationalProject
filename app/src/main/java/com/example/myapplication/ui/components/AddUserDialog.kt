@@ -2,7 +2,7 @@ package com.example.myapplication.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -13,14 +13,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.myapplication.ui.theme.MyApplicationTheme
 
 @Composable
@@ -39,6 +41,13 @@ fun AddUserDialog(
     // Кнопка активна, если оба поля заполнены корректно
     val isFormValid = firstName.length >= 3 && lastName.length >= 3
 
+    // Создаем объект для управления фокусом
+    val focusRequester = remember { FocusRequester() }
+
+    // Этот блок сработает один раз при запуске диалога
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus() // Просим фокус
+    }
 
     AlertDialog(
         title = {
@@ -59,8 +68,8 @@ fun AddUserDialog(
                     },
                     label = { Text("Имя") },
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
+                        .focusRequester(focusRequester)
+                        .fillMaxWidth(),
                     trailingIcon = {
                         if (firstName.isNotEmpty()) {
                             IconButton(onClick = { firstName = "" }) {
@@ -84,8 +93,7 @@ fun AddUserDialog(
                     },
                     label = { Text("Фамилия") },
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
+                        .fillMaxWidth(),
                     trailingIcon = {
                         if (lastName.isNotEmpty()) {
                             IconButton(onClick = { lastName = "" }) {
@@ -94,7 +102,14 @@ fun AddUserDialog(
                         }
                     },
                     // Настройка клавиатуры
-                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            if (isFormValid) onConfirmation(firstName.trim(), lastName.trim())
+                        }
+                    )
                 )
             }
         },
@@ -104,7 +119,7 @@ fun AddUserDialog(
         confirmButton = {
             TextButton(
                 onClick = {
-                    onConfirmation(firstName, lastName)
+                    onConfirmation(firstName.trim(), lastName.trim())
                 },
                 enabled = isFormValid
             ) {
