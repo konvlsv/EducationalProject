@@ -17,7 +17,7 @@ import com.example.myapplication.ui.components.UsersLazyColumn
 import com.example.myapplication.ui.models.UserModel
 import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.example.myapplication.ui.viewmodels.UserViewModel
-import com.example.myapplication.utils.getUsersList
+import com.example.myapplication.utils.getMockUsersList
 
 // 1. Эта функция для связи с логикой (ViewModel)
 @Composable
@@ -99,7 +99,7 @@ fun UserListContentPreview() {
     MyApplicationTheme {
         UserListContent(
             searchText = "",
-            filteredList = getUsersList(), // Берем тестовые данные
+            filteredList = getMockUsersList(), // Берем тестовые данные
             onSearchChange = {},
             onStatusChange = {},
             onDelete = {},

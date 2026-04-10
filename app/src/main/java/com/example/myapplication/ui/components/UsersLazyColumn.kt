@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.ui.models.UserModel
 import com.example.myapplication.ui.theme.MyApplicationTheme
-import com.example.myapplication.utils.getUsersList
+import com.example.myapplication.utils.getMockUsersList
 
 @Composable
 fun UsersLazyColumn(
@@ -50,10 +50,10 @@ fun UsersLazyColumn(
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun UsersLazyColumnPreview(){
+fun UsersLazyColumnPreview() {
     MyApplicationTheme() {
         UsersLazyColumn(
-            list = getUsersList(),
+            list = getMockUsersList(),
             onStatusChange = {},
             onDelete = {},
             onCardClick = {},

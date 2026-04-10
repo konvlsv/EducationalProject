@@ -2,7 +2,7 @@ package com.example.myapplication.utils
 
 import com.example.myapplication.ui.models.UserModel
 
-fun getUsersList(): List<UserModel> {
+fun getMockUsersList(): List<UserModel> {
     return listOf(
         UserModel(1, "John", "Doe", true),
         UserModel(2, "Jane", "Smith", false),

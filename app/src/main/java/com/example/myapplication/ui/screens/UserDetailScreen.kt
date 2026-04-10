@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.example.myapplication.R
 import com.example.myapplication.ui.models.UserModel
 import com.example.myapplication.ui.theme.MyApplicationTheme
-import com.example.myapplication.utils.getUsersList
+import com.example.myapplication.utils.getMockUsersList
 
 @Composable
 fun UserDetailScreen(
@@ -94,7 +94,7 @@ fun UserDetailScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun UserDetailScreenPreview() {
-    val user = getUsersList().first()
+    val user = getMockUsersList().first()
     MyApplicationTheme() {
         UserDetailScreen(
             user = user,

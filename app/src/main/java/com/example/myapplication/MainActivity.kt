@@ -16,23 +16,17 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.core.content.edit
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.myapplication.ui.models.UserModel
 import com.example.myapplication.ui.screens.UserDetailScreen
 import com.example.myapplication.ui.screens.UserListScreen
 import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.example.myapplication.ui.viewmodels.UserViewModel
-import com.example.myapplication.utils.getMockUsersList
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
-    val sharedPref = this.getPreferences(MODE_PRIVATE)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        createSharedPreferences()
         enableEdgeToEdge()
         setContent {
             val scope = rememberCoroutineScope()
@@ -82,38 +76,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    private fun createSharedPreferences() {
-        if (sharedPref.all == null) {
-            getMockUsersList().forEach { user ->
-                sharedPref.edit {
-                    putString(
-                        user.id.toString(),
-                        "${user.firstName} ${user.lastName} ${user.isOnline}"
-                    )
-                }
-            }
-        }
-    }
-
-    private fun getUsersList(): List<UserModel> {
-        val users = mutableListOf<UserModel>()
-        if (sharedPref.all != null) {
-            sharedPref.all.forEach { (string, any) ->
-                if (any is String) {
-                    val (firstName, lastName, isOnline) = any.split(" ")
-                    users.add(
-                        UserModel(
-                            id = string.toInt(),
-                            firstName = firstName,
-                            lastName = lastName,
-                            isOnline = isOnline.toBoolean()
-                        )
-                    )
-                }
-            }
-        }
-        return users
     }
 }

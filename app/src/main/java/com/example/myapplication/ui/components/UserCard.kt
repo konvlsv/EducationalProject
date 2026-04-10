@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.example.myapplication.R
 import com.example.myapplication.ui.models.UserModel
 import com.example.myapplication.ui.theme.MyApplicationTheme
-import com.example.myapplication.utils.getUsersList
+import com.example.myapplication.utils.getMockUsersList
 
 @Composable
 fun UserCard(
@@ -38,7 +38,7 @@ fun UserCard(
 ) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        onClick = { onCardClick(userModel)},
+        onClick = { onCardClick(userModel) },
         modifier = modifier
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -50,7 +50,7 @@ fun UserCard(
                     modifier = Modifier.size(40.dp)
                 )
                 Spacer(modifier = Modifier.width(16.dp))
-                Column{
+                Column {
                     Text(
                         text = "${userModel.firstName} ${userModel.lastName}",
                         style = MaterialTheme.typography.titleLarge
@@ -93,7 +93,7 @@ fun UserCard(
 @Composable
 fun UserCardPreview() {
     MyApplicationTheme() {
-        val previewUserModel = getUsersList().first()
+        val previewUserModel = getMockUsersList().first()
         UserCard(
             userModel = previewUserModel,
             onStatusChange = {},
