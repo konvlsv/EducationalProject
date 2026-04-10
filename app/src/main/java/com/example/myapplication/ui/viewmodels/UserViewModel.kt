@@ -23,8 +23,8 @@ class UserViewModel : ViewModel() {
         }.sortedWith(
             compareBy(
                 { !it.isOnline }, // Сначала те, кто Online (true станет false и уйдет вверх)
-                { it.firstName },  // Затем по имени
-                { it.lastName }  // Затем по фамилии
+                { it.firstName.lowercase() },  // Затем по имени
+                { it.lastName.lowercase() }  // Затем по фамилии
             )
         )
     }
